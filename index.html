@@ -101,9 +101,16 @@
             if (!oStatus.success) {
                 return false;
             }
+
+            if (soundManager.canPlayMIME('audio/ogg')) {
+                soundManager.fileEnding = 'ogg';
+            } else {
+                soundManager.fileEnding = 'mp3';
+            }
+
             soundManager.blank = soundManager.createSound({
                 id: 'startSound',
-                url: 'media/blank.mp3'
+                url: 'media/blank.' + soundManager.fileEnding
             });
         });
 
