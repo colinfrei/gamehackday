@@ -13,6 +13,12 @@
             font-size: 12pt;
         }
 
+        #overlay {
+            position: absolute;
+            width: 100%;
+            height: 320px;
+        }
+
         #container {
             width:100%;
             height:100%;
@@ -67,6 +73,41 @@
     <!-- <script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script> -->
     <script type="text/javascript" src="lib/impact/impact.js"></script>
     <script type="text/javascript" src="lib/game/main.js"></script>
+    <script type="text/javascript" src="lib/soundmanager/soundmanager2.js"></script>
+    <script type="text/javascript">
+
+        soundManager.url = 'lib/soundmanager/swf/';
+        soundManager.audioFormats = {
+            'mp3': {
+                'type': ['audio/mpeg; codecs="mp3"', 'audio/mpeg', 'audio/mp3', 'audio/MPA', 'audio/mpa-robust'],
+                'required': false
+            },
+            'mp4': {
+                'related': ['aac','m4a'], // additional formats under the MP4 container
+                'type': ['audio/mp4; codecs="mp4a.40.2"', 'audio/aac', 'audio/x-m4a', 'audio/MP4A-LATM', 'audio/mpeg4-generic'],
+                'required': false
+            },
+            'ogg': {
+                'type': ['audio/ogg; codecs=vorbis'],
+                'required': false
+            },
+            'wav': {
+                'type': ['audio/wav; codecs="1"', 'audio/wav', 'audio/wave', 'audio/x-wav'],
+                'required': false
+            }
+        };
+
+        soundManager.onready(function(oStatus) {
+            if (!oStatus.success) {
+                return false;
+            }
+            soundManager.blank = soundManager.createSound({
+                id: 'startSound',
+                url: 'media/blank.mp3'
+            });
+        });
+
+    </script>
     <script type="text/javascript">
         touchMove = function(event) {
             // Prevent scrolling on this element
@@ -76,12 +117,13 @@
 </head>
 <body>
 <div id="container" ontouchmove="touchMove(event);">
+    <div id="overlay" onclick="if(StartScreen && StartScreen.start){soundManager.blank.play();StartScreen.start();}"></div>
     <canvas id="canvas"></canvas>
     <div id="buttons">
-        <div id="upButton" class="button"><img src="media/arrow.png" /></div>
-        <div id="downButton" class="button"><img src="media/arrow.png" /></div>
-        <div id="leftButton" class="button"><img src="media/arrow.png" /></div>
-        <div id="rightButton" class="button"><img src="media/arrow.png" /></div>
+        <div id="upButton" class="button">Up</div>
+        <div id="downButton" class="button">Down</div>
+        <div id="leftButton" class="button">Left</div>
+        <div id="rightButton" class="button">Right</div>
     </div>
 </div>
 </body>
