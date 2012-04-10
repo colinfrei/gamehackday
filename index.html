@@ -13,20 +13,34 @@
 		}
 		
 		#canvas {
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			margin: auto;
+            width: 640px;
+            height: 480px;
+            margin: 0 auto;
 			border: 1px solid #555;
 		}
+
+        .button {
+            width: 157px;
+            display: inline-block;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 5px;
+            background-color: red;
+        }
 	</style>
 
 	<script type="text/javascript" src="lib/impact/impact.js"></script>
 	<script type="text/javascript" src="lib/game/main.js"></script>
 </head>
 <body>
-	<canvas id="canvas"></canvas>
+    <div id="container">
+        <canvas id="canvas"></canvas>
+        <div id="buttons">
+            <div id="upButton" class="button">Up</div>
+            <div id="downButton" class="button">Down</div>
+            <div id="leftButton" class="button">Left</div>
+            <div id="rightButton" class="button">Right</div>
+        </div>
+    </div>
 </body>
 </html>
