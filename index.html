@@ -107,15 +107,21 @@
             });
         });
 
-    </script>
-    <script type="text/javascript">
         touchMove = function(event) {
             // Prevent scrolling on this element
             event.preventDefault();
         }
+
+        resizeOverlay = function() {
+            // resize overlay
+            var overlay = document.getElementById('overlay'),
+                canvas = document.getElementById('canvas');
+            overlay.style.height = canvas.offsetHeight + 'px';
+        }
+
     </script>
 </head>
-<body>
+<body onload="resizeOverlay()" onresize="resizeOverlay()">
 <div id="container" ontouchmove="touchMove(event);">
     <div id="overlay" onclick="if(StartScreen && StartScreen.start){soundManager.blank.play();StartScreen.start();}"></div>
     <canvas id="canvas"></canvas>
